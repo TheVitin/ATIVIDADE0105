@@ -1,19 +1,1 @@
-const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'phpmyadmin',
-  password: 'aluno',
-  database: 'Carros'
-});
-
-connection.connect();
-
-const queryString = `CALL sp_gasalcoll()`;
-
-connection.query(queryString, (error, results, fields) => {
-  if (error) throw error;
-  console.log('Stored procedure criada com sucesso!');
-});
-
-connection.end();
