@@ -1,0 +1,17 @@
+const mysql = require('mysql2');
+
+// Configuração da conexão com o banco de dados
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'phpmyadmin',
+  password: 'aluno',
+  database: 'Carros'
+});
+connection.query
+
+ const queryString  = 'CALL executeExercises()';
+
+{
+  if (error) throw error;
+  console.log('Stored Procedure SP_AdicionarCliente criada com sucesso!');
+});

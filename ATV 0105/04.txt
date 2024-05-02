@@ -1,0 +1,20 @@
+const mysql = require('mysql2');
+
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'phpmyadmin',
+      password: 'aluno',
+      database: 'Carros'
+    });
+
+    connection.connect();
+
+    const queryString = 'SELECT * FROM Carros WHERE ESTÁ_DISPONIVEL = "SIM"';
+
+    connection.query(queryString, (error, results, fields) => {
+      if (error) throw error;
+      console.log('Resultado da consulta:');
+      console.log(results);
+    });
+
+    connection.end();

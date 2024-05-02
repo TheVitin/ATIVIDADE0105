@@ -1,0 +1,32 @@
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'phpmyadmin',
+  password: 'aluno',
+  database: 'Carros'
+});
+
+connection.connect();
+
+const queryString = `
+CREATE PROCEDURE sp_gasalcoll()
+BEGIN
+    SELECT LOCAÇÕES.CÓDIGO AS ID_Locacao,
+           Carros.NOME_CARRO AS Modelo_Carro,
+           Carros.COMBUSTÍVEL AS Tipo_Combustivel,
+           CLIENTES.NOME_CLIENTE AS Nome_Cliente,
+           CLIENTES.TELEFONE AS Telefone_Cliente
+    FROM LOCAÇÕES
+    JOIN Carros ON LOCAÇÕES.CODCARRO = CARROS.CÓDIGO
+    JOIN CLIENTES ON LOCAÇÕES.CODCLIENTE = CLIENTES.CÓDIGO
+    WHERE Carros.COMBUSTÍVEL IN ('GASOLINA', 'ÁLCCOL');
+END
+`;
+
+connection.query(queryString, (error, results, fields) => {
+  if (error) throw error;
+  console.log('Stored procedure criada com sucesso!');
+});
+
+connection.end();
